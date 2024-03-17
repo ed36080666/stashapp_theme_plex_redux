@@ -2,5 +2,5 @@
   name: "Stash Theme: Plex Redux"
   version: 1.0.0
   date: "2024-03-16"
-  path: "./dist/plugin.zip"
+  path: "https://github.com/ed36080666/stashapp_theme_plex_redux/raw/main/dist/plugin.zip"
   sha256: e933402448c995a37a8f1b67c424348850faee9156d8f5aec2fbfc0f05ab76b4
