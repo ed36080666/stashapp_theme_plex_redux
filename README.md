@@ -6,8 +6,11 @@ This theme overhauls page layouts and styles using transparency with the intent 
 
 ## Examples
 [Example 1](https://github.com/ed36080666/stashapp_theme_plex_redux/blob/main/assets/scenes.JPG)
+
 [Example 2](https://github.com/ed36080666/stashapp_theme_plex_redux/blob/main/assets/home.JPG)
+
 [Example 3](https://github.com/ed36080666/stashapp_theme_plex_redux/blob/main/assets/performers.JPG)
+
 
 [Example With Background Image](https://github.com/ed36080666/stashapp_theme_plex_redux/blob/main/assets/background.gif)
 
