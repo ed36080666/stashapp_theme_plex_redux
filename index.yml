@@ -1,6 +1,8 @@
-- id: "ed36080666-plugin-id-1"
-  name: "Stash Theme: Plex Redux"
+- id: PlexThemeRedux
+  name: "Plex Theme Redux"
+  metadata:
+    description: "An expaded and updated version of the Plex Theme originally created by Fidelio 2020"
   version: 1.0.0
-  date: "2024-03-16"
-  path: "https://github.com/ed36080666/stashapp_theme_plex_redux/raw/main/dist/plugin.zip"
+  date: 2024-02-11 08:41:16
+  path: dist/plugin.zip
   sha256: e933402448c995a37a8f1b67c424348850faee9156d8f5aec2fbfc0f05ab76b4
