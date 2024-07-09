@@ -1,3 +1,962 @@
+/***********************************************************
+ * Table of Contents
+ *
+ * 1.  Global Styles
+ * 2.  Top Navbar Styles
+ * 3.  Card Styles
+ *     3a.  Scene + Movie Card Specific Adjustments
+ *     3b.  Performer Card Specific Adjustments
+ * 4.  Button Styles
+ * 5.  Form Input Styles
+ * 6.  Pagination Styles
+ * 7.  Item List Page Layout Styles
+ * 8.  Tabbed Navigation Styles
+ * 9.  General Page Styles
+ * 10. Performer Page Styles
+ * 11. Home Recommendation Page Styles
+ * 12. Studio Page Styles
+ * 13. Tag Page Styles
+ * 14. Scene Page Styles
+ * 15. Settings Page Styles
+ *
+ ***********************************************************/
+
+
+/***********************************************************
+ * 1. Global Styles (background, scrollbar etc.).
+ ***********************************************************/
 body {
-    background-color: red !important;
+    background-image: url("https://raw.githubusercontent.com/ed36080666/stashapp_theme_plex_redux/main/assets/background.png");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #3f4245;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+#root {
+    background: rgba(0, 0, 0, 0) url("https://raw.githubusercontent.com/ed36080666/stashapp_theme_plex_redux/main/assets/noise.png") repeat scroll 0% 0%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+* {
+    scrollbar-color: hsla(0, 0%, 100%, .2) transparent;
+}
+
+a {
+    color: hsla(0, 0%, 100%, .45);
+}
+
+a:hover {
+    color: hsla(0, 0%, 100%, .7);
+}
+
+/* hide donate button */
+.nav-utility:has(.donate) {
+    display: none;
+}
+
+.bg-dark {
+    background-color: var(--grey-800) !important;
+}
+
+/* fix truncated text class cuting off the bottoms of certain letters (e.g. "g") */
+.TruncatedText {
+    padding-bottom: 1px;
+}
+
+.popover {
+    background-color: var(--transparent-500);
+}
+
+/* update the stashbox pill + id displayed on various pages */
+.stash-id-pill span {
+    background: var(--yellow-primary);
+}
+
+.stash-id-pill a {
+    background-color: var(--transparent-100);
+    color: var(--off-white);
+    font-weight: normal;
+}
+
+/* don't show "stash ids" heading for the stashbox pill/id because it is self-explanatory */
+.detail-item-title.stash-ids {
+    display: none;
+}
+
+/* badge style updates */
+.badge-pill.badge-info {
+    background-color: var(--yellow-primary);
+}
+
+/***********************************************************
+ * 2. Top Navbar Styles
+ ***********************************************************/
+.top-nav {
+    padding: var(--spacing-100) var(--spacing-300) 0 var(--spacing-300);
+}
+
+/* pull up top nav items so the active tab aligns evenly with background color */
+.top-nav,
+.top-nav .navbar-brand,
+.top-nav .navbar-buttons {
+    margin-bottom: -7px;
+}
+
+.navbar-buttons {
+    transform: translateY(-2px);
+}
+
+.top-nav a.btn,
+.nav-utility.btn,
+.nav-utility .btn {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    font-size: 0.9rem;
+    color: var(--off-white);
+    padding: 0.5rem 0.75rem !important;
+    border-bottom: 2.5px solid transparent;
+    background: none !important;
+}
+
+.top-nav a.btn:focus,
+.top-nav a.btn:active {
+    box-shadow: none !important;
+    background: none !important;
+}
+
+.top-nav a svg {
+    transform: scale(0.85);
+    opacity: 0.8;
+    margin-left: 0;
+}
+
+.top-nav a.active,
+.top-nav a:hover,
+.nav-utility.btn:hover .nav-utility .btn:hover {
+    background-color: transparent !important;
+    color: var(--white);
+    -webkit-text-stroke-width: 0.25px;
+    border-radius: 0;
+}
+
+.top-nav a.active {
+    border-bottom: 2.5px solid var(--yellow-primary) !important;
+}
+
+/* replace "stash" home button with icon */
+.top-nav .brand-link {
+    visibility: collapse;
+    text-indent: -16px;
+}
+
+.top-nav .brand-link:after {
+    visibility: visible;
+    display: inline-block;
+    content: url(https://raw.githubusercontent.com/ed36080666/stashapp_theme_plex_redux/main/assets/home-icon.svg);
+    transform: translateY(-2px) scale(0.9);
+}
+
+/***********************************************************
+ * 3. Card Styles
+ ***********************************************************/
+/* update played progress indicator at bottom of video preview */
+.grid-card .progress-indicator {
+    background-color: rgba(var(--yellow-500), 0.8);
+}
+
+.skeleton-card {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .2), 0 0 rgba(0, 0, 0, 0), 0 0 rgba(0, 0, 0, 0);
+    background-color: var(--transparent-300);
+}
+
+.job-table.card,
+.search-item,
+.card {
+    background-color: var(--card-background);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-300);
+    background-color: var(--card-background);
+    box-shadow: none;
+}
+
+.card .minimal.btn.btn-primary {
+    background: none !important;
+}
+
+/* add radius to card-section because when title text is truncated an extra node is inserted and messes up parent radius */
+.card-section {
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+/* remove radius if we have the popover icon section */
+.card:has(.card-popovers) .card-section {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* adjust the text styles for card sectiosn */
+.card-section-title {
+    color: var(--white) !important;
+    font-size: var(--card-heading-size);
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+/* remove borders between filename and icon sections */
+.image-card hr,
+.scene-card hr,
+.gallery-card hr,
+.movie-card hr,
+.performer-card hr,
+.studio-card hr {
+    display: none;
+}
+
+.card-section {
+    padding: var(--spacing-200) var(--spacing-300) 0;
+}
+
+/* moves background from parent to child to prevent height discrepencies between cards leaving lots of empty background */
+.studio-card,
+.scene-card,
+.performer-card,
+.movie-card {
+    background: none;
+}
+
+.studio-card:hover .card-section,
+.scene-card:hover .card-section,
+.performer-card:hover .card-section,
+.movie-card:hover .card-section {
+    background: var(--transparent-200);
+}
+
+.studio-card .card-section,
+.studio-card .thumbnail-section,
+.scene-card .card-section,
+.performer-card .card-section,
+.movie-card .card-section {
+    background-color: var(--card-background);
+}
+
+
+.movie-card .card-section,
+.performer-card .card-section,
+.scene-card .card-section {
+    padding-top: var(--spacing-300);
+}
+
+/**
+ * Card Footer Icon Adjusments
+ */
+.card-popovers {
+    /* left align all icons */
+    justify-content: flex-start;
+    padding-bottom: var(--spacing-100);
+    padding-left: var(--spacing-200);
+    gap: var(--spacing-100);
+}
+
+/** apply background to the icon buttons and fix alignments the various card types */
+.card-popovers .btn {
+    padding: var(--spacing-100);
+    padding-right: var(--spacing-200);
+    font-size: 12px;
+    color: var(--off-white);
+}
+
+.card-popovers .organized .btn {
+    padding-left: var(--spacing-200);
+}
+
+.movie-card .card-popovers,
+.performer-card .card-popovers,
+.scene-card .card-popovers,
+.studio-card .card-popovers {
+    background: var(--card-background);
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    padding-bottom: var(--spacing-200);
+}
+
+/**
+ * 3.a Scene + Movie Card Specific Adjustments
+ */
+/* scene card needs pulled up to avoid gap from preview extending boundaries */
+.scene-card .card-section {
+    margin-top: -6px;
+}
+
+.movie-card__date,
+.scene-card__date {
+    color: var(--card-subheading-color);
+    font-size: var(--card-subheading-size);
+    /* limit scene date to 4 characters */
+    display: inline-block;
+    max-width: 4ch;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* when scene card date is empty, fix the fucked up spacing */
+.movie-card__date:empty,
+.scene-card__date:empty {
+    padding: 0;
+    display: block;
+    margin: 0.4rem 0;
+}
+
+.movie-card__description,
+.scene-card__description {
+    color: var(--off-white);
+}
+
+.movie-card__details,
+.scene-card__details {
+    margin-bottom: var(--spacing-200);
+}
+
+/**
+ * 3.b Studio Card Specific Adjustments
+ */
+.studio-card__details {
+    color: var(--card-subheading-color);
+}
+
+.studio-card .card-popovers {
+    padding-top: var(--spacing-200);
+}
+
+.studio-card .card-section,
+.studio-card .thumbnail-section {
+    padding: 0 var(--spacing-300);
+}
+
+.studio-card .thumbnail-section {
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+}
+
+.studio-card .card-section {
+    padding-left: 0;
+    padding: 0 var(--spacing-300);
+}
+
+.studio-card .card {
+    padding: 0;
+    padding-bottom: 0 !important;
+}
+
+/**
+ * 3.b Performer Card Specific Adjustments
+ */
+.performer-card .gender-icon {
+    display: none;
+}
+
+.performer-card__age {
+    font-size: var(--card-subheading-size);
+    color: var(--card-subheading-color);
+    margin-bottom: var(--spacing-200);
+}
+
+.performer-card .card-section {
+    margin-top: 0;
+}
+
+
+/***********************************************************
+ * 4. Button Styles
+ ***********************************************************/
+.btn {
+    background-color: var(--transparent-200) !important;
+    border-color: var(--transparent-100) !important;
+    box-shadow: none !important;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+}
+
+.btn-primary {
+    color: #fff;
+    background: var(--transprent-300);
+}
+
+.btn-secondary {
+    color: var(--off-white);
+    background-color: var(--transparent-200);
+    border: 1px solid var(--transparent-300);
+}
+
+.btn-secondary.active {
+    background-color: var(--transparent-500) !important;
+    color: var(--white);
+}
+
+.btn.btn-secondary:hover:not(:disabled),
+.btn.btn-secondary:active:not(:disabled) {
+    color: var(--white);
+    background-color: var(--transparent-300) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.btn.btn-danger {
+    background-color: var(--btn-danger) !important;
+}
+
+.edit-buttons .edit-button.btn-primary {
+    background-color: var(--btn-success) !important;
+}
+
+.btn.btn-link {
+    font-weight: 500;
+    color: #eee !important;
+    text-decoration: none;
+}
+
+.folder-list .btn-link {
+    color: #2c2e30;
+}
+
+.btn.active {
+    background-color: #2f3335;
+    color: #f5f8fa;
+}
+
+.preview-button .btn {
+    background: none !important;
+}
+
+/* remove backgrounds from the star rating buttons */
+.rating-stars button.btn,
+.rating-stars button.btn.btn-secondary:hover {
+    background-color: transparent !important;
+}
+
+/***********************************************************
+ * 5. Form Input Styles
+ ***********************************************************/
+input.form-control,
+select.form-control,
+textarea.form-control,
+.form-control,
+.react-select__control {
+    color: var(--off-white);
+    background-color: var(--transparent-200) !important;
+    border: 1px solid var(--transparent-300) !important;
+    box-shadow: none;
+}
+
+.react-select__menu {
+    background-color: var(--transparent-900) !important;
+}
+
+input.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus,
+.react-select__control--is-focused {
+    box-shadow: 0 0 1px 2px rgba(var(--yellow-500), 0.3) !important;
+    border-color: rgba(var(--yellow-500), 0.3) !important;
+}
+
+/* update color of the card size setting bar */
+input[type="range"]::-webkit-slider-runnable-track,
+input[type=range]:focus::-webkit-slider-runnable-track {
+    /* background: var(--yellow-primary); */
+    background: var(--transparent-300);
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background: var(--grey-800);
+    border-radius: 50%;
+}
+
+.dropdown.btn-group:active,
+.dropdown.btn-group:focus {
+    box-shadow: 0 0 1px 2px rgba(var(--yellow-500), 0.3);
+}
+
+/* set background color for dropdown menus (fighting against utility classes) */
+div.dropdown-menu,
+div.dropdown-menu.bg-secondary {
+    background-color: var(--transparent-700) !important;
+}
+
+.dropdown-item.bg-secondary {
+    background-color: transparent !important;
+}
+
+select.form-control option {
+    background-color: var(--transparent-700) !important;
+}
+
+/* update color of toggle switches */
+.custom-control-input:checked~.custom-control-label:before {
+    background-color: rgb(var(--yellow-700));
+    border-color: rgb(var(--yellow-700));
+}
+
+/***********************************************************
+ * 6. Pagination Styles
+ ***********************************************************/
+.btn-toolbar .btn-group .btn {
+    margin: 0;
+}
+
+/* needs and extra pixel margin to align with other button */
+.btn-toolbar .filter-button.btn {
+    margin-bottom: 1px;
+}
+
+.btn-toolbar .btn-group .btn:not(:first-child) {
+    border-left: none !important;
+}
+
+.pagination .btn-group .btn {
+    margin: 0;
+}
+
+.pagination .btn {
+    padding: 0.25rem 1rem;
+}
+
+/* fix first + last pagination button missin borders */
+.pagination.btn-group .btn.btn-secondary:first-child {
+    border-left: 1px solid var(--transparent-300);
+}
+
+.pagination.btn-group .btn.btn-secondary:last-child {
+    border-right: 1px solid var(--transparent-300);
+}
+
+.pagination.btn-group .btn.btn-secondary:not(:first-child) {
+    border-left: none;
+}
+
+
+/***********************************************************
+ * 7. Item List Page Layout Styles (e.g. scenes, performers, etc)
+ ***********************************************************/
+.item-list-container {
+    /* aligns the content of list pages with navbar items horizontally */
+    margin: 0 var(--spacing-200);
+}
+
+.item-list-container .btn-toolbar {
+    margin-bottom: var(--spacing-200);
+}
+
+/* left align filter bar */
+.item-list-container .btn-toolbar {
+    justify-content: flex-start !important;
+}
+
+/* push the edit and view options in toolbar to the right */
+.item-list-container .btn-toolbar *:nth-child(5) {
+    margin-left: auto !important;
+}
+
+/* set grid for items in list. min value is swapped to match zoom level */
+.item-list-container .row.justify-content-center:not(.wall) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--zoom-0), 1fr));
+    grid-row-gap: var(--spacing-300);
+    margin: 0;
+}
+
+.item-list-container .row.justify-content-center:has(.zoom-1) {
+    grid-template-columns: repeat(auto-fill, minmax(var(--zoom-1), 1fr));
+}
+
+.item-list-container .row.justify-content-center:has(.zoom-2) {
+    grid-template-columns: repeat(auto-fill, minmax(var(--zoom-2), 1fr));
+}
+
+.item-list-container .row.justify-content-center:has(.zoom-3) {
+    grid-template-columns: repeat(auto-fill, minmax(var(--zoom-3), 1fr));
+}
+
+/* set grid for items in performer list where card is hardcoded 20rem */
+.item-list-container .row.justify-content-center:has(.performer-card.grid-card) {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
+.item-list-container .grid-card {
+    margin: 0;
+}
+
+/* align pagination left */
+.item-list-container .pagination {
+    margin-top: var(--spacing-500);
+    margin-bottom: var(--spacing-100);
+    justify-content: flex-start;
+}
+
+.item-list-container .filter-tags {
+    justify-content: flex-start !important;
+}
+
+.item-list-container .paginationIndex {
+    justify-content: flex-start;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--off-white);
+    padding-left: var(--spacing100);
+}
+
+/* don't dispaly the duration and size of search result */
+.item-list-container .paginationIndex .scenes-stats {
+    display: none;
+}
+
+
+.query-text-field-group:has(.query-text-field) {
+    width: 400px;
+}
+
+/***********************************************************
+ * 8. Tabbed Navigation Styles
+ ***********************************************************/
+.nav.nav-tabs {
+    border-bottom: none;
+}
+
+/* .nav-item.nav-link.active, */
+.nav-tabs .nav-link.active {
+    color: rgb(var(--yellow-500));
+    background: var(--transparent-200);
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link.active:hover {
+    border-color: rgb(var(--yellow-500));
+}
+
+/***********************************************************
+ * 9. General Page styles
+ ***********************************************************/
+/*
+  * Set styles for the hedaer details section on certain pages (e.g. performer page).
+  */
+.detail-header {
+    background: var(--transparent-200);
+    margin-bottom: var(--spacing-400);
+    padding: 0 var(--spacing-500);
+}
+
+.detail-container:not(#performer-page .detail-header.edit .detail-container) {
+    display: flex;
+    gap: var(--spacing-600);
+}
+
+.detail-header-image {
+    padding: 0;
+}
+
+.detail-header-image button {
+    padding: 0;
+    background: none !important;
+}
+
+.detail-item-title {
+    color: var(--grey-200);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+/* Left align any tabbed navigation items */
+.detail-body .nav.nav-tabs {
+    justify-content: flex-start;
+    padding: 0 var(--spacing-200);
+}
+
+.detail-header .detail-container .detail-item-value.age {
+    border-bottom: none;
+}
+
+/* don't show backgrounds for buttons the favorite/expand/collapse buttons in page headers */
+.detail-header .detail-expand-collapse button.btn,
+.name-icons button.btn {
+    background: none !important;
+}
+
+/***********************************************************
+ * 10. Performer Page styles
+ ***********************************************************/
+.detail-header .alias-head {
+    color: var(--grey-200);
+    font-size: 12px;
+}
+
+/* edit performer page layout (increase performer image size, etc.) */
+@media screen and (min-width: 1200px) {
+
+    /* 1200px = breakpoint-xl */
+    #performer-page .detail-header.edit .detail-container {
+        display: grid;
+        grid-template-columns: 300px 100%;
+        gap: var(--spacing-600);
+    }
+
+    #performer-page .detail-header.edit .detail-header-image {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    #performer-page .detail-header.edit .detail-header-image img {
+        max-width: 100%;
+    }
+
+    #performer-page .detail-header.edit img.performer {
+        position: fixed;
+        max-width: 300px;
+    }
+}
+
+/* increase size of side performer on widescreen */
+@media screen and (min-width: 1600px) {
+    #performer-page .detail-header.edit .detail-container {
+        grid-template-columns: 500px 100%;
+    }
+
+    #performer-page .detail-header.edit img.performer {
+        max-width: 500px;
+    }
+}
+
+/***********************************************************
+ * 11. Home Recommendation Page Styles
+ ***********************************************************/
+/* lighten the weight of the headings */
+.recommendation-row-head {
+    padding-bottom: 0;
+}
+
+.recommendation-row-head h2 {
+    font-weight: normal;
+    color: var(--grey-100);
+    letter-spacing: 0.05em;
+}
+
+.recommendation-row-head a {
+    color: var(--grey-100);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: normal;
+    font-size: 14px;
+    align-self: flex-end;
+}
+
+/***********************************************************
+ * 12. Studio Page Styles
+ ***********************************************************/
+/* ensure logo image stays in container */
+.studio-card-image {
+    max-width: 100%;
+}
+
+/* remove funky padding on the studio grid list */
+.studio-card.grid-card.card {
+    padding: 0;
+}
+
+/* the grid list on studio page has extra utility classes we have to fight */
+.item-list-container .row.justify-content-center:has(.studio-card) {
+    grid-column-gap: var(--spacing-300);
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/***********************************************************
+ * 13. Tag Page Styles
+ ***********************************************************/
+/* left align and cleanup item list on tag page */
+.item-list-container .col:has(.tag-list-row) {
+    margin: 0 !important;
+}
+
+/* lighten color of tag name */
+.tag-list-row a {
+    color: var(--off-white);
+}
+
+/***********************************************************
+ * 14. Scene Page Styles
+ ***********************************************************/
+/* update styles for queue list */
+#queue-viewer .queue-controls {
+    background: none;
+}
+
+#queue-viewer .queue-controls button.btn {
+    background: none !important;
+}
+
+#queue-content ol {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+#queue-content li {
+    background: var(--transparent-100);
+    margin: 0 !important;
+    padding: 8px 0;
+}
+
+#queue-content li.current {
+    background: var(--transparent-300);
+}
+
+/* update edit scene form */
+#scene-edit-details .edit-buttons-container {
+    background: var(--transparent-500);
+    padding: 6px 0 !important;
+    margin: 0 0 1.5rem 0 !important;
+}
+
+#scene-edit-details .edit-buttons-container .edit-buttons {
+    margin: 0 !important;
+}
+
+/* update the various labels */
+#scene-edit-details label.form-label,
+.scene-file-info dt,
+.scene-details h6,
+.scene-tabs h6,
+.scene-video-filter .col-sm-3,
+.scene-video-filter h5 {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+    color: var(--grey-200);
+    align-self: center;
+    font-weight: normal;
+}
+
+.scene-video-filter h5 {
+    font-size: 1.25rem;
+    color: var(--off-white);
+}
+
+/* for headings that have multiple rows of input we align heading top */
+#scene-edit-details label[for="urls"] {
+    align-self: flex-start;
+}
+
+/**
+ * Scene Details Tab
+ */
+.scene-details {
+    margin-bottom: var(--spacing-300);
+}
+
+/* reduce bottom margin on date heading */
+.scene-details h5 {
+    margin-bottom: var(--spacing-100);
+}
+
+.scene-details h6 {
+    text-transform: none;
+    margin: 0 !important;
+    line-height: 1.25;
+}
+
+/* hide rating label in details tab */
+.scene-details h6:has(.rating-stars) {
+    font-size: 0;
+    margin-bottom: var(--spacing-300) !important;
+    /* can't display none because rating stars are children. */
+}
+
+.scene-details .rating-stars {
+    font-size: 1rem;
+    /* ensure stars don't inherit 0 font size */
+}
+
+.star-rating-number {
+    display: none;
+}
+
+/* fix spacing for sections below the details */
+.scene-tabs h6:not(:first-child) {
+    margin-top: 1rem;
+}
+
+/* left align performer cards in scene details */
+.scene-performers {
+    justify-content: flex-start !important;
+}
+
+/* if only 1 performer card, display a larger card */
+.scene-performers .performer-card-image {
+    height: 100%;
+}
+
+.scene-performers .performer-card {
+    flex-grow: 1;
+}
+
+/* if has siblings, don't grow */
+.scene-performers .performer-card+* {
+    flex-grow: 0;
+}
+
+/***********************************************************
+ * 15. Settings Page Styles
+ ***********************************************************/
+/* update page/section heading styles */
+.setting-section h1,
+#configuration-tabs-tabpane-logs h2,
+.changelog h1,
+.tasks-panel-queue h1 {
+    text-transform: uppercase;
+    color: var(--grey-100);
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    font-size: 1.5rem !important;
+}
+
+/* update color of dividing border for items within section */
+.setting-section .setting-group:not(:last-child),
+.setting-section .setting:not(:last-child) {
+    border-bottom: 1px solid var(--transparent-300);
+}
+
+.setting-section .card {
+    margin: 5px 0;
+}
+
+/* update styles of floating task queue box */
+#tasks-panel .tasks-panel-queue {
+    padding: var(--spacing-300);
+    margin-bottom: var(--spacing-300);
+    background-color: var(--transparent-500);
+}
+
+/* update table heading background colors */
+.package-manager table thead {
+    background-color: var(--transparent-200);
+}
+
+/* hide an empty row being used as a border :eyeroll: */
+.package-manager-table-container .border-row {
+    display: none;
+}
+
+/* update striping color for lists */
+.setting-section .stash-row.bg-dark {
+    background-color: var(--transparent-300) !important;
 }

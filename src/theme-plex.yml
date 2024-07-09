@@ -1,6 +1,7 @@
 name: "Stash Theme: Plex Redux"
-description: "An expaded and updated version of the Plex Theme originally created by Fidelio 2020"
+description: "An expaded and updated version of the Plex Theme. Designed to be used alongside my background image plugin."
 version: 1.0.0
 ui:
   css:
+    - variables.css
     - theme-plex.css
