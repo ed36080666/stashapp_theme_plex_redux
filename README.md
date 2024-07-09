@@ -11,8 +11,7 @@ This theme overhauls page layouts and styles using transparency with the intent 
 
 [Example 3](https://github.com/ed36080666/stashapp_theme_plex_redux/blob/main/assets/performers.JPG)
 
-
-[Example With Background Image](https://github.com/ed36080666/stashapp_theme_plex_redux/blob/main/assets/background.gif)
+[Example With Background Image Plugin](https://github.com/ed36080666/stashapp_theme_plex_redux/blob/main/assets/background.gif)
 
 ## Installation
 1. Go to `Settings > Plugins Available Plugins > Add Source`
